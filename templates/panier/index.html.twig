@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block main %}
+    {{ dump(lesServices)}}
+
+    {% if app.session.get('produitTotal') != 0 %}
+        <fieldset class="col-12">
+        <table id="panier" style="width:90%">
+            <tr>
+                <th>N&ordm;</th>
+                <th>Titre</th>
+                <th colspan="2">prix</th>
+                <th>Supprimer</th>
+            </tr>
+            {% set totalPrix = 0.0 %}
+            {% for ligne in lesServices %}
+                {% set totalPrix = totalPrix +ligne.prix %}
+                <tr id="lignepanier{{ ligne.reference }}">
+                    <td>{{ ligne.reference }}</td>
+                    <td>{{ ligne.titre }}</td>
+                    <td class="prix text-right" style="borderleft:none">{{ ligne.prix }}</td>
+                    <td class="text-left"> &euro;</td>
+                    <td>
+                        <a class="ligne" >
+                            <button type="button" style="margin:10px" onclick='effacerPanier({{ ligne.reference }},{{ligne.prix }})' >
+                                [ - ]
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr class="ligne_total">
+                <td class="ligne_total text-right" id="total_prix3"
+                colspan=2>Total </td>
+                <td id="total_prix1" class="textright">{{ totalPrix }}</td>
+                <td class="text-left" id="total_prix2"> &euro;</td>
+                <td style="border:none"></td>
+            </tr>
+        </table>
+        </fieldset>
+        {{ app.session.set('totalPanier',totalPrix ) }}
+        <div class="col-xs-12 col-md-12 col-lg-12 text-left">
+            {% if app.user %}
+                <a href="{{ path('panier.commande')}}">
+                    <button type="submit" style="margin:20px">
+                        COMMANDER
+                    </button>
+                </a>
+            {% else %}
+                <a href="{{ path('connexion.index')}}">
+                    <button type="submit" style="margin:20px">
+                        COMMANDER
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+        {% else %}
+        <p> Le panier est vide</p>
+    {% endif %}
+
+    <script>
+        {# JavaScript pour envoyer une requête Ajax GET lorsqu'un utilisateur
+        clique sur le bouton "[-]" #}
+        function effacerPanier(ligneRef, prixRef){
+            const d =document.querySelector('#total_prix1').textContent;
+            var prixTotalAvtSup = parseInt(d);
+            prixTotalAvtSup = prixTotalAvtSup -prixRef;
+            const selector = '#lignepanier'+ligneRef;
+            //Ajax
+            fetch('/panier/supprimer/'+ligneRef)
+            .then(response => response.json())
+            .then(data => {
+            if (data.success) {
+                document.querySelector(selector).parentNode.removeChild(document.querySelector(selector));
+                alert('Le service est supprimé du panier !');
+                document.querySelector('.panier').innerHTML='Panier ({{ app.session.get('produitTotal')-1}})';
+                document.querySelector('#total_prix1').innerHTML=prixTotalAvtSup;
+            } else{
+                alert('problemo');
+            }
+            })
+            .catch(error => {
+            console.error('Erreur Ajax :', error);
+            });
+        }
+    </script>
+{% endblock %}

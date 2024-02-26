@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ephad Discount : Profil
+{% endblock %}
+
+{% block main %}
+	PAGES Profil
+	{{dump(app.user.personne)}}
+	{{dump(client.login.login)}}
+
+	<h1 class="col-12">Votre profil...</h1>
+	<div class="tm-company-right-inner col-12">
+		<ul class="nav nav-tabs" id="tmCompanyTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link tm-nav-link-border-right active" data-toggle="tab" href="#editer" role="tab" aria-controls="editer" aria-selected="true">editer</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link tm-no-border-right" id="modifier-tab" data-toggle="tab" href="#modifier" role="tab" aria-controls="modifier" aria-selected="true">modifier</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link tm-no-border-right" id="lesCommandes-tab" data-toggle="tab" href="#lesCommandes" role="tab" aria-controls="lesCommandes" aria-selected="true">Vos commandes</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link tm-no-border-right" id="allergies-tab" data-toggle="tab" href="#allergies" role="tab" aria-controls="allergies" aria-selected="true">Allergies</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="tmTabContent">
+			<div class="tab-pane fade show active" id="editer" role="tabpanel" aria-labelledby="editer-tab">
+				<form>
+					<fieldset>
+
+						<div class="form-group">
+							<label for="i_nom">Nom :
+							</label>
+							<input type="text" class="form-control" id="i_nom" name="nom" value="{{client.nom}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_prenom">Prénom :
+							</label>
+							<input type="text" class="form-control" id="i_prenom" name="prenom" value="{{client.prenom}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_rue">Rue :
+							</label>
+							<input type="text" class="form-control" id="i_rue" name="rue" value="{{client.rue}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_cp">Code Postal :
+							</label>
+							<input type="text" class="form-control" id="i_cp" name="cp" value="{{client.cp}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_ville">Ville :
+							</label>
+							<input type="text" class="form-control" id="i_ville" name="ville" value="{{client.ville}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_email">Email :
+							</label>
+							<input type="text" class="form-control" id="i_email" name="email" value="{{client.email}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_tel">Téléphone :
+							</label>
+							<input type="text" class="form-control" id="i_tel" name="tel" value="{{client.tel}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_mdp">Login :
+							</label>
+							<input type="text" class="form-control" id="i_mdp" name="mdp" value="{{client.login.login}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_mdp">Mot de passe :
+							</label>
+							<input type="password" class="form-control" id="i_mdp" name="mdp" value="{{client.login.mdp}}">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="tab-pane fade" id="modifier" role="tabpanel" aria-labelledby="modifier-tab">
+				<form method="POST" action="">
+
+					<fieldset>
+
+						<div class="form-group">
+							<label for="i_nom">Nom :
+							</label>
+							<input type="text" class="form-control" id="i_nom" name="nom" value="{{client.nom}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_prenom">Prénom :
+							</label>
+							<input type="text" class="form-control" id="i_prenom" name="prenom" value="{{client.prenom}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_rue">Rue :
+							</label>
+							<input type="text" class="form-control" id="i_rue" name="rue" value="{{client.rue}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_cp">Code Postal :
+							</label>
+							<input type="text" class="form-control" id="i_cp" name="cp" value="{{client.cp}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_ville">Ville :
+							</label>
+							<input type="text" class="form-control" id="i_ville" name="ville" value="{{client.ville}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_email">Email :
+							</label>
+							<input type="text" class="form-control" id="i_email" name="email" value="{{client.email}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_tel">Téléphone :
+							</label>
+							<input type="text" class="form-control" id="i_tel" name="tel" value="{{client.tel}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_mdp">Login :
+							</label>
+							<input type="text" class="form-control" id="i_login" name="login" value="{{client.login.login}}">
+						</div>
+
+						<div class="form-group">
+							<label for="i_mdp">Changer de mot de passe :
+							</label>
+							<input type="password" class="form-control" id="i_mdp" name="mdp" value="{{client.login.mdp}}">
+						</div>
+
+						<div class="form-group">
+							<input type="submit" value="valider" name="valider">
+						</div>
+					</fieldset>
+				</form>
+				<div>
+					{{ message }}
+				</div>
+
+			</div>
+			<div class="tab-pane fade" id="lesCommandes" role="tabpanel" aria-labelledby="lesCommandes-tab">
+				<ul>
+					{% if lesCommandes %}
+						{% for laCommande in lesCommandes %}
+							<li>
+								<a href="{{path('facture.index', {id:laCommande.nocommande}) }}">Commande n°{{ laCommande.nocommande }}</a>
+							</li>
+						{% endfor %}
+					{% else %}
+						Vous n'avez pas de commandes!
+					{% endif %}
+				</ul>
+			</div>
+
+
+			<!-- Allergies -->
+			<div class="tab-pane fade" id="allergies" role="tabpanel" aria-labelledby="modifier-tab">
+				<form method="POST" action="">
+					<fieldset>
+					
+						<select multiple name="allergies" id="allergies">
+							{% for allergie in allergies %}
+								<option> {{allergie.nom}} </option>
+							{% endfor %}
+						</select> 
+						<div class="form-group">
+							<input type="submit" value="valider" name="valider">
+						</div>
+					</fieldset>
+				</form>
+				<div>
+					{{ message }}
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Controller;
+
+use App\Repository\PersonneRepository;
+use App\Security\UserProvider;
+use App\Security\User;
+
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ConnexionController extends AbstractController
+{
+    #[Route('/connexion', 'connexion.index', methods:['GET'])]
+    public function index(PersonneRepository $personneRepository): Response
+    {
+
+        //Création d'un User pour la personne 'test@test1.fr' -> test
+        $leUser=new User();
+
+        //MAJ du user
+        $leUser->setUsername('test@test1.fr');
+        $leUser->verifierPersonne($personneRepository);
+
+        //Debug
+        //dd($leUser);
+
+
+        //Création d'un UserProvider pour la personne 'test@test1.fr' -> test
+        $leUser=new UserProvider($personneRepository);
+
+        //MAJ du userProvider
+        $leUser->loadUserByIdentifier('test@test1.fr');
+
+        //Debug
+        //dd($leUser);
+
+
+        //la vue
+        return $this->render('connexion/index.html.twig');
+    }
+}

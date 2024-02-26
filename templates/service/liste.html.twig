@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block main %}
+    <h1 class="col-12">
+        {% if lesServices is not empty and lesServices[0].numerocat is not empty %}
+            Les services {{ lesServices[0].numerocat.libele }} de l'ehpad Discount
+        {% else %}
+            Pas de service dans cette catégorie
+        {% endif %}
+    </h1>
+    <h3>
+        {% if lesServices is not empty %}
+            Il y a des services.
+        {% else %}
+            Il n'y a pas de services.
+        {% endif %}
+    </h3>
+    <div class="col-12 text-left">
+        <div class="row">
+            {% if lesServices is not empty %}
+                {# Boucle pour lister les services #}
+                {% for leService in lesServices %}
+                    <article class="col-3">
+                        <p>
+                            <a href="{{ path('service.detail', {'id': leService.reference}) }}">
+                                <img src="{{ asset('asset/img/' ~ leService.photo) }}" width="300px" style="border: 2px solid black; border-radius: 4px;" />
+                            </a>
+                        </p>
+                        <p>{{ leService.titre }}</p>
+                        <p>{{ leService.resume }}</p>
+                    </article>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

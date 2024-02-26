@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PaiementController!{% endblock %}
+
+{% block main %}
+<h1 class="col-12">Paiement sécurisé</h1>
+
+<h2 class="col-12"><i class="bi bi-shield-lock-fill"></i>&nbsp; <span style="border-left:2px solid black">&nbsp; A chaque étape, votre paiement en ligne est 100% sécurisé !</span>
+</h2>
+<h3 class="col-12">Sécurité des transactions</h3>
+<p class="col-12">
+    Le serveur est en mode crypté et toutes les informations sont codées (protocole SSL de Netscape).
+    Les données saisies lors de la commande (n° de carte de crédit, date de validité, n° de cryptogramme...) sont vérifiées auprès de différents serveurs d'autorisation : cet échange a pour but d'éviter fraudes et abus.
+</p>
+
+<h3 class="col-12">Retrait de votre commande</h3>
+<p class="col-12">
+    Lors du retrait de votre commande au point de livraison, il vous sera demandé de présenter une pièce d'identité ainsi que la carte ayant servi pour le règlement de votre commande : une garantie supplémentaire de sécurité !
+</p>
+<h2 class="col-12"><i class="bi bi-credit-card"></i>&nbsp; <span style="border-left:2px solid black">&nbsp; Un grand choix de modes de paiement</span></h2>
+<p class="col-12">
+    Nous vous offrons un grand choix de modes de paiement, vous trouverez sûrement celui que vous préférez !
+</p>
+<p class="col-12">
+    L'ehpad Discount accepte toutes les cartes bancaires suivantes :
+<ul>
+    <li>La Carte bleue, Visa, Mastercard et Eurocard</li>
+    <li>La Carte American express</li>
+    <li>L’e-carte bleue</li>
+</ul>
+</p>
+<p class="col-12">
+    <img src="{{ asset('asset/img/cartes.png')}}" alt="les moyens de paiement">
+</p>
+{% endblock %}

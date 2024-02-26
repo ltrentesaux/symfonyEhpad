@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block main %}
+    PAGES SERVICE 
+    {#{ dump(lesCategories) }#}
+
+    <h1 class="col-12">Tous les services de l'ehpad Discount</h1>
+    <div class="col-12 text-center">
+
+        <section class="row text-center">
+            {% for laCategorie in lesCategories %}
+                    <article class="col-md-3 col-12 col-sm-12" style="height:200px;border:2px solid black;border-radius:5px;margin:10px; background-color:orange">
+                        <a style="color:black" href="{{ path('service.liste',{id:laCategorie.numerocat})}}">
+                            <div class="text-center" style="width:100%;height:100%;padding-top:5em">
+                                {{laCategorie.libele}}
+                            </div>
+                        </a>
+                    </article>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Welcome!{% endblock %}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=
+%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em
+%22 font-size=%2296%22></text></svg>">
+{# Run `composer require symfony/webpack-encore-bundle` to start
+using Symfony UX #}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,
+shrink-to-fit=no" />
+<title>Ehpad</title>
+{% block stylesheets %}
+{{ encore_entry_link_tags('app') }}
+<link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="{{ asset('asset/css/style.css') }}"
+/>
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrapicons.css">
+{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></
+script>
+<script src="{{ asset('asset/js/script.js') }}"></script>
+{% endblock %}
+</head>
+<body>
+<div class="container-fluid" id="top">
+{% block header %}
+{% include "partials/_header.html.twig" %}
+{% endblock %}
+<div id="illustration" class="row" >
+<div id="image" class="col text-center d-none d-md-block">
+<img id="service"
+src="{{ asset('asset/img/ehpad_presentation.jpg')}}" alt="les services de
+l'ehpad">
+<span>
+Bienvenue à l'ehpad <i>Discount</i></span>
+<p><i class=" bi bi-circle"></i> <i class="bi bicircle"></i> <i class="bi bi-circle"></i> <i class="bi bi-circle"></i> <i
+class="bi bi-circle"></i></p>
+</div>
+</div>
+<script src="{{ asset('asset/js/carrousel.js') }}"></script>
+<div id="main" class="row" >
+{% block main %}
+
+{% endblock %}
+</div>
+<div id="message"></div>
+
+{% block footer %}
+{% include "partials/_footer.html.twig" %}
+{% endblock %}
+</div>
+</body>
+</html>

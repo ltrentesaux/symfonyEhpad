@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ehpad Discount : Rechercher{% endblock %}
+
+{% block main %}
+{{dump(lesServices)}}
+
+<h1 class="col-12">
+    Les résultats de la recherche 
+</h1>
+<div class="col-12" id="rechercher">
+
+        <ul class="col-12">
+            {% if lesServices %}
+                {% for leService in lesServices %}
+                <li>
+                    <p>
+                        <a href="{{ path('service.detail', {id:leService.reference})}}">{{leService.titre}}</a>
+                    </p>
+                    <p>
+                        {{leService.resume}}
+                    </p>
+                </li>
+                {% endfor %}
+        {% else %}
+            Il n'y a aucun résultats pour votre recherche
+        {% endif %}
+        </ul>
+</div>
+
+{% endblock %}

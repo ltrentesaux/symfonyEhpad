@@ -1,0 +1,62 @@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css')}}" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<header class="row">
+<div id="logo" class="col-md-3 text-center d-none d-md-block">
+<nav class="navbar navbar-expand-md">
+<div class="navbar-nav">
+<span class="nav-item">
+<p>
+<a class="nav-link"
+href="{{ path('accueil.index')}}"><i class="bi bi-activity"></i>
+Ehpad <i>Discount</i></a>
+</p>
+</span>
+</div>
+</nav>
+</div>
+<div id="navigation" class="col-md-9 col-12 col-sm-12 textuppercase text-justify">
+<nav class="navbar navbar-expand-md">
+<ul class="navbar-nav">
+<li class="nav-item"></li>
+<li class="nav-item"><a class="nav-link" href="{{ path('accueil.index')}}">Accueil</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ path('service.index')}}">Service</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ path('apropos.index')}}">A propos</a></li>
+
+{% if app.user %}
+    <li class="nav-link"><a class="nav-link" href="{{ path('app_logout')}}">Déconnexion</a></li>
+    <li class="nav-link"><a class="nav-link" href="{{ path('profil.index')}}">Profil</a></li>
+{% else %}
+    <li class="nav-link"><a class="nav-link" href="{{ path('app_login')}}">Connexion</a></li>
+{% endif %}
+
+<li class="nav-item" style="display:flex">
+    <a class="nav-link panier" href="{{ path('panier.index')}}">
+        Panier ({{ app.session.get('produitTotal','0')}})
+        {% if app.session.get('produitTotal','0') != 0 %}
+             ({{ app.session.get('produitTotal','0')}})
+        {% endif %}
+    </a>
+</li>
+<li class="nav-item"><a class="nav-link" href="{{ path('contact.index')}}">Contact</a></li>
+<li class="nav-item d-none d-md-block">
+<a class="nav-link">
+<form method="POST" action="rechercher">
+<input id="rechercher" type="text"
+name="n_cherche"> <button type="submit"> <i class=" bi bisearch"></i></button>
+</form>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<script>
+document.querySelector('.panier').innerHTML='Panier({{ app.session.get('produitTotal','0')}})';
+</script>

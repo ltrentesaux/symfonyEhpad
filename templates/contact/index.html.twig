@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block main %}
+    {% if message is not null %}
+        <p>
+            {{ message }}
+            <br>
+            <button onclick="window.location.href='{{ path('contact.index') }}'">Revenir à la page de contact</button>
+        </p>
+        
+    {% else %}
+        {{form(formulaire)}}
+    {% endif %}
+{% endblock %}

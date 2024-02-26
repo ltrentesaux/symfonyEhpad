@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block main %}
+    {#{ dump(leService) }#}
+
+    <h1 class="col-12 text-center">
+        {{ leService.TITRE }} en détail...
+    </h1>
+    <div class="col-12">
+        <article class="col-12 text-center">
+            <p>
+                <a href=""><img src="{{ asset('asset/img/' ~ leService.photo) }}" width="50%" style="border: 2px solid black; border-radius: 4px;" /> </a>
+            </p>
+
+            <p>{{ leService.description|raw }}</p>
+            <p><b>Prix à payer : {{ leService.PRIX }} €</b></p>
+        </article>
+    </div>
+
+    <script>
+        document.querySelector('article>p>a').addEventListener('click', (e) =>{e.preventDefault();
+        // Envoyez la requête Ajax GET
+        fetch("{{ path('panier.ajouter',{id:leService.reference})}}")
+        .then(response => response.json())
+        .then(data => {
+        if (data.success) {
+        document.querySelector('.panier').innerHTML='Panier({{ app.session.get('produitTotal','0')+1 }})'; alert('Le service {{ leService.titre }} ajouté au panier avec succès !');
+        } else {
+        alert('Le service {{ leService.titre }} est déjà dans le panier !');
+        }
+        })
+        .catch(error => {console.error('Erreur Ajax :', error);
+        });
+        });
+    </script>
+{% endblock %}
+
+

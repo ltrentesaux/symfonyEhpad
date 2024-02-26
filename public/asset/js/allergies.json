@@ -1,0 +1,20 @@
+{
+    "Allergies": [
+        {
+            "num": 1,
+            "nom": "pollen"
+        },
+        {
+            "num": 2,
+            "nom": "gluten"
+        },
+        {
+            "num": 3,
+            "nom": "poisson"
+        },
+        {
+            "num": 4,
+            "nom": "eau"
+        }
+    ]
+}

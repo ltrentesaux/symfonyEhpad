@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Ehpad Discount : Facture{% endblock %}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=
+%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em
+%22 font-size=%2296%22></text></svg>">
+{# Run `composer require symfony/webpack-encore-bundle` to start
+using Symfony UX #}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,
+shrink-to-fit=no" />
+
+{% block stylesheets %}
+{{ encore_entry_link_tags('app') }}
+<link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+/>
+<link rel="stylesheet" href="{{ asset('asset/css/style.css') }}"
+/>
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrapicons.css">
+{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></
+script>
+<script src="{{ asset('asset/js/script.js') }}"></script>
+{% endblock %}
+</head>
+<body>
+    <div class="container-fluid" id="top">
+
+
+
+
+        {% block header %}
+            <table>
+                <tr>
+                    <td> <img src="{{asset('asset/img/logo.png')}}"> </td>
+                    <td style="text-align:left;margin-left:10px;">  
+                        Ehpad Discount - 7, rue des archives<br>
+                        53 000 Laval<br>
+                        <i class="bi bi-telephone"></i> : 02 43 99 99 99 - <i class="bi bi-mailbox"></i> :
+                        contact@ehpaddiscount.fr<br>
+                    </td>
+                </tr>
+            </table>
+        {% endblock %}
+
+        {% block main %}
+            <h2> Commande n° {{laCommande.nocommande}}</h2>
+            <div style="border:1px solid black; width:50%; margin-top:50px;padding:5px;">
+                <p>Nom : {{laCommande.login.nom}}</p>
+                <p>Prenom : {{laCommande.login.prenom}} </p>
+                <p>Adresse : {{laCommande.login.rue}} </p>
+                <p>CP - Ville : {{laCommande.login.cp}} {{laCommande.login.ville}} </p>
+                <p>Tel : {{laCommande.login.tel}} </p>
+                <p>Email : {{laCommande.login.email}} </p>
+            </div>
+
+            <fieldset class="col-12" style="margin-top:50px;padding:5px;width:100%;">
+                <table id="panier" style="width:90%;border:1px solid black;">
+                    <tr style="border:1px solid black;">
+                        <th>N&ordm; </th>
+                        <th>Titre</th>
+                        <th>Prix</th>
+                    </tr>
+                    {% set totalPrix = 0.0 %}
+                    {% for ligne in laCommande.reference %}
+                        {% set totalPrix = totalPrix + ligne.prix %}
+                        <tr id="lignepannier{{ ligne.reference }}" style="width:90%;border:1px solid black;">
+                            <td style="border:1px solid black;">{{ligne.reference}}</td>
+                            <td style="border:1px solid black;">{{ligne.titre}}</td>
+                            <td style="border:1px solid black;">{{ligne.prix}} &euro;</td>
+                        </tr>
+                    {% endfor %}
+
+                    <tr style="border:1px solid black;">
+                        <td style="border: 1px solid black;text-align:right;" colspan="3">
+                            <br>
+                            Montant payé {{totalPrix}} &euro; TTC
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        {% endblock %}
+        {% block footer %}
+            <table style="width:100%;border-top:1px solid black;">
+                <tr>
+                    <td style="width:100%;text-align:center;">
+                        Page {PAGENO}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100%;text-align:center;">
+                        Ehpad Discount - 7, rue des archives<br>
+                        53 000 Laval<br>
+                        <i class="bi bi-telephone"></i> : 02 43 99 99 99 - <i class="bi bi-mailbox"></i> :
+                        contact@ehpaddiscount.fr<br>
+                        Copyright © France
+                    </td>
+                </tr>
+            </table>
+            
+        {% endblock %}
+    </div>
+</body>
+</html>

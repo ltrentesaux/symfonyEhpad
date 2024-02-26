@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ehpad Discount : Commande{% endblock %}
+
+{% block main %} Pages commande
+<form action="{{ path('panier.commande')}}" class="tm-contact-form" method="POST">
+    <div>
+        <div>Montant à payer : {{ app.session.get('totalPanier') }} € </div>
+    </div>
+    <fieldset>
+        <legend> Information CB </legend>
+        <ol>
+            <li>
+                <fieldset>
+                    <legend>Type de carte bancaire</legend>
+                    <ol>
+                        <li>
+                            <input id="visa" name="type_de_carte" type="radio">
+                            <label for="visa">VISA</label>
+                        </li>
+                        <li>
+                            <input id="mastercard" name="type_de_carte" type="radio">
+                            <label for="mastercard">Mastercard</label>
+                        </li>
+                    </ol>
+                </fieldset>
+            </li>
+            <li>
+                <label for="numero_de_carte">N° de carte</label>
+                <input id="numero_de_carte" name="numero_de_carte" type="number" required>
+            </li>
+            <li>
+                <label for="securite">Code de sécurité</label>
+                <input id="securite" name="securite" type="number" required>
+            </li><li>
+                <label for="nom_porteur">Nom du porteur</label>
+                <input id="nom_porteur" name="nom_porteur" type="text" placeholder="Même nom que sur la carte" required>
+            </li>
+        </ol>
+    </fieldset>
+
+    <fieldset>
+        <button type="submit" name="valider" value="valider"> ACHETER </button>
+    </fieldset>
+</form>
+             
+{% endblock %}
